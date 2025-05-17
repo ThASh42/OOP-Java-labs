@@ -10,7 +10,7 @@ public class BaseTicket implements Ticket {
         this.flight = flight;
         this.withLuggage = withLuggage;
         this.priorityBoarding = priorityBoarding;
-        this.price = flight.calculateTicketPrice(withLuggage, priorityBoarding);
+        this.price = calculateTicketPrice(withLuggage, priorityBoarding);
     }
 
     @Override
@@ -32,6 +32,14 @@ public class BaseTicket implements Ticket {
                 ", priorityBoarding=" + priorityBoarding +
                 ", price=" + price +
                 '}';
+    }
+
+    private double calculateTicketPrice(boolean withLuggage, boolean priorityBoarding) {
+        double ticketCalculatedPrice = flight.calculatePrice();
+        if (withLuggage) ticketCalculatedPrice += 40;
+        if (priorityBoarding) ticketCalculatedPrice += 15;
+
+        return ticketCalculatedPrice;
     }
 
     public Client getClient() {
