@@ -8,7 +8,7 @@ public class Flight {
     private int totalSeats;
     private int bookedSeats = 0;
     private double basePrice;
-    private List<Ticket> tickets = new ArrayList<>();
+    private List<BaseTicket> tickets = new ArrayList<>();
 
     public Flight(String flightNumber, LocalDate departureDate, int totalSeats, double basePrice) {
         this.flightNumber = flightNumber;
@@ -34,14 +34,14 @@ public class Flight {
         return price;
     }
 
-    public Ticket bookTicket(Client client, boolean withLuggage, boolean priorityBoarding) {
+    public BaseTicket bookTicket(Client client, boolean withLuggage, boolean priorityBoarding) {
         if (!hasAvailableSeats()) return null;
 
         double price = calculatePrice();
         if (withLuggage) price += 40;
         if (priorityBoarding) price += 15;
 
-        Ticket ticket = new Ticket(client, this, withLuggage, priorityBoarding, price);
+        BaseTicket ticket = new BaseTicket(client, this, withLuggage, priorityBoarding, price);
         tickets.add(ticket);
         bookedSeats++;
         return ticket;
@@ -98,11 +98,11 @@ public class Flight {
         this.basePrice = basePrice;
     }
 
-    public List<Ticket> getTickets() {
+    public List<BaseTicket> getTickets() {
         return tickets;
     }
 
-    public void setTickets(List<Ticket> tickets) {
+    public void setTickets(List<BaseTicket> tickets) {
         this.tickets = tickets;
     }
 }
