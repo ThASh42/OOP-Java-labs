@@ -34,12 +34,18 @@ public class Flight {
         return price;
     }
 
+    public double calculateTicketPrice(boolean withLuggage, boolean priorityBoarding) {
+        double ticketCalculatedPrice = calculatePrice();
+        if (withLuggage) ticketCalculatedPrice += 40;
+        if (priorityBoarding) ticketCalculatedPrice += 15;
+
+        return ticketCalculatedPrice;
+    }
+
     public BaseTicket bookTicket(Client client, boolean withLuggage, boolean priorityBoarding) {
         if (!hasAvailableSeats()) return null;
 
-        double price = calculatePrice();
-        if (withLuggage) price += 40;
-        if (priorityBoarding) price += 15;
+        double price = calculateTicketPrice(withLuggage, priorityBoarding);
 
         BaseTicket ticket = new BaseTicket(client, this, withLuggage, priorityBoarding, price);
         tickets.add(ticket);

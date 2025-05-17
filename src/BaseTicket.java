@@ -5,12 +5,12 @@ public class BaseTicket implements Ticket {
     private boolean priorityBoarding;
     private double price;
 
-    public BaseTicket(Client client, Flight flight, boolean withLuggage, boolean priorityBoarding, double price) {
+    public BaseTicket(Client client, Flight flight, boolean withLuggage, boolean priorityBoarding) {
         this.client = client;
         this.flight = flight;
         this.withLuggage = withLuggage;
         this.priorityBoarding = priorityBoarding;
-        this.price = price;
+        this.price = flight.calculateTicketPrice(withLuggage, priorityBoarding);
     }
 
     @Override

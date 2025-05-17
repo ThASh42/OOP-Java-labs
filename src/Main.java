@@ -13,11 +13,11 @@ public class Main {
             System.out.println("Немає вільних місць.");
         }
 
-        Ticket ticketLuggagePriority = new BaseTicket(client1, flight, true, true, 1000);
+        Ticket ticketLuggagePriority = new BaseTicket(client1, flight, true, true);
         ticketLuggagePriority = new Luggage(ticketLuggagePriority);
         ticketLuggagePriority = new PriorityBoarding(ticketLuggagePriority);
 
-        Ticket ticketNoLuggage = new BaseTicket(client1, flight, true, true, 1000);
+        Ticket ticketNoLuggage = new BaseTicket(client1, flight, true, true);
 
         System.out.println("\n---ticketLuggagePriority---\n" + "Опис: " + ticketLuggagePriority.getDescription());
         System.out.println("Загальна ціна: " + ticketLuggagePriority.getTicketPrice());
