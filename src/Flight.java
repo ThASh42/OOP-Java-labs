@@ -31,7 +31,7 @@ public class Flight {
     private void selectStrategy() {
         long daysUntilFlight = ChronoUnit.DAYS.between(LocalDate.now(), departureDate);
         double loadFactor = (double) bookedSeats / totalSeats;
-        System.out.println("daysUntilFlight: " + daysUntilFlight);
+
         if (daysUntilFlight > 7 && loadFactor < 0.5) {
             priceStrategy = new PriceEarlyStrategy();
         } else if (daysUntilFlight <= 7 || loadFactor >= 0.8) {
