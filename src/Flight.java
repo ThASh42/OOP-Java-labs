@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ public class Flight {
     private int bookedSeats = 0;
     private double basePrice;
     private List<BaseTicket> tickets = new ArrayList<>();
+    private PriceStrategy priceStrategy;
 
     public Flight(String flightNumber, LocalDate departureDate, int totalSeats, double basePrice) {
         this.flightNumber = flightNumber;
@@ -22,16 +24,21 @@ public class Flight {
     }
 
     public double calculatePrice() {
-        double price = basePrice;
-        long daysUntilFlight = LocalDate.now().until(departureDate).getDays();
+        selectStrategy();
+        return priceStrategy.calculatePrice(this);
+    }
 
-        if (daysUntilFlight < 7) {
-            price *= 1.5;
-        } else if ((double) bookedSeats / totalSeats > 0.8) {
-            price *= 1.3;
+    private void selectStrategy() {
+        long daysUntilFlight = ChronoUnit.DAYS.between(LocalDate.now(), departureDate);
+        double loadFactor = (double) bookedSeats / totalSeats;
+        System.out.println("daysUntilFlight: " + daysUntilFlight);
+        if (daysUntilFlight > 7 && loadFactor < 0.5) {
+            priceStrategy = new PriceEarlyStrategy();
+        } else if (daysUntilFlight <= 7 || loadFactor >= 0.8) {
+            priceStrategy = new PriceLastMinuteStrategy();
+        } else {
+            priceStrategy = new PriceMediumStrategy();
         }
-
-        return price;
     }
 
     public BaseTicket bookTicket(Client client, boolean withLuggage, boolean priorityBoarding) {
@@ -52,6 +59,10 @@ public class Flight {
                 ", bookedSeats=" + bookedSeats +
                 ", basePrice=" + basePrice +
                 '}';
+    }
+
+    public void setPriceStrategy(PriceStrategy priceStrategy) {
+        this.priceStrategy = priceStrategy;
     }
 
     public String getFlightNumber() {
