@@ -1,4 +1,9 @@
+package ua.com.project.app;
+
+import ua.com.project.model.*;
+
 import java.time.LocalDate;
+
 
 public class Main {
     public static void main(String[] args) {

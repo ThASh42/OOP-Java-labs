@@ -1,3 +1,7 @@
+package ua.com.project.model;
+
+import ua.com.project.decorator.TicketDecorator;
+
 public class PriorityBoarding extends TicketDecorator {
     public PriorityBoarding(Ticket ticket) {
         super(ticket);

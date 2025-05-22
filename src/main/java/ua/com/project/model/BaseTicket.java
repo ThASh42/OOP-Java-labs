@@ -1,3 +1,5 @@
+package ua.com.project.model;
+
 public class BaseTicket implements Ticket {
     private Client client;
     private Flight flight;

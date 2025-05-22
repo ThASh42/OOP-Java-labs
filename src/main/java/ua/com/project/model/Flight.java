@@ -1,15 +1,22 @@
+package ua.com.project.model;
+
+import ua.com.project.strategy.PriceEarlyStrategy;
+import ua.com.project.strategy.PriceLastMinuteStrategy;
+import ua.com.project.strategy.PriceMediumStrategy;
+import ua.com.project.strategy.PriceStrategy;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Flight {
-    private String flightNumber;
-    private LocalDate departureDate;
-    private int totalSeats;
+    private final String flightNumber;
+    private final LocalDate departureDate;
+    private final int totalSeats;
     private int bookedSeats = 0;
-    private double basePrice;
-    private List<BaseTicket> tickets = new ArrayList<>();
+    private final double basePrice;
+    private final List<BaseTicket> tickets = new ArrayList<>();
     private PriceStrategy priceStrategy;
 
     public Flight(String flightNumber, LocalDate departureDate, int totalSeats, double basePrice) {
@@ -61,55 +68,28 @@ public class Flight {
                 '}';
     }
 
-    public void setPriceStrategy(PriceStrategy priceStrategy) {
-        this.priceStrategy = priceStrategy;
-    }
-
     public String getFlightNumber() {
         return flightNumber;
-    }
-
-    public void setFlightNumber(String flightNumber) {
-        this.flightNumber = flightNumber;
     }
 
     public LocalDate getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(LocalDate departureDate) {
-        this.departureDate = departureDate;
-    }
-
     public int getTotalSeats() {
         return totalSeats;
-    }
-
-    public void setTotalSeats(int totalSeats) {
-        this.totalSeats = totalSeats;
     }
 
     public int getBookedSeats() {
         return bookedSeats;
     }
 
-    public void setBookedSeats(int bookedSeats) {
-        this.bookedSeats = bookedSeats;
-    }
-
     public double getBasePrice() {
         return basePrice;
-    }
-
-    public void setBasePrice(double basePrice) {
-        this.basePrice = basePrice;
     }
 
     public List<BaseTicket> getTickets() {
         return tickets;
     }
 
-    public void setTickets(List<BaseTicket> tickets) {
-        this.tickets = tickets;
-    }
 }

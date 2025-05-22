@@ -1,3 +1,7 @@
+package ua.com.project.decorator;
+
+import ua.com.project.model.Ticket;
+
 public abstract class TicketDecorator implements Ticket {
     protected Ticket decoratedTicket;
 
