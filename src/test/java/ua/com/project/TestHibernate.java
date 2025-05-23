@@ -29,7 +29,6 @@ public class TestHibernate {
 
         FlightDao flightDao = factory.getFlightDao();
 
-        // Create and save Flight
         Flight flight = new Flight();
         flight.setFlightNumber("LC123");
         flight.setDepartureDate(LocalDate.now().plusDays(5));
@@ -38,30 +37,20 @@ public class TestHibernate {
 
         flightDao.save(flight);
 
-        // findById
         Flight retrievedFlight = flightDao.findById(1L);
         assertEquals("LC123", retrievedFlight.getFlightNumber());
 
-        // findByName
         Flight flightByName = flightDao.findByName("LC123");
         assertEquals("LC123", flightByName.getFlightNumber());
 
-        // findAll
         List<Flight> flights = flightDao.findAll();
         assertEquals(1, flights.size());
 
-        // update
         retrievedFlight.setFlightNumber("LC456");
         flightDao.update(retrievedFlight);
         Flight updatedFlight = flightDao.findByName("LC456");
         assertEquals("LC456", updatedFlight.getFlightNumber());
 
-        // Delete
-        // flightDao.delete(updatedFlight);
-        // assertEquals(0, flightDao.findAll().size());
-
-        // -------------------
-        // Now test Ticket DAO
         TicketDao ticketDao = factory.getTicketDao();
 
         Ticket ticket = new Ticket();
